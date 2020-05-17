@@ -3,7 +3,10 @@
 
     <!-- DecisionListFragment -->
     <string name="nothing_to_show">No decisions to show, use the add icon to create one</string>
+    <string name="unnamed">Unnamed</string>
 
     <!-- DecisionFragment -->
     <string name="decision_name">Decision Name</string>
+    <!-- menu -->
+    <string name="new_decision">New Decision</string>
 </resources>

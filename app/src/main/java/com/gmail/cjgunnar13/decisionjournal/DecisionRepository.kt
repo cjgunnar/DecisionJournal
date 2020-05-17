@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.gmail.cjgunnar13.decisionjournal.database.DecisionDatabase
 import java.util.*
+import java.util.concurrent.Executors
 
 private const val DATABASE_NAME = "decision_database"
 
@@ -24,10 +25,17 @@ class DecisionRepository private constructor(context: Context) {
         .build()
     private val decisionDao = database.decisionDao()
 
+    private val executor = Executors.newSingleThreadExecutor()
+
     //REPOSITORY ACCESS FUNCTIONS
     fun getDecisions(): LiveData<List<Decision>> = decisionDao.getDecisions()
     fun getDecision(uuid: UUID): LiveData<Decision?> = decisionDao.getDecision(uuid)
-    fun updateDecision(decision: Decision) = decisionDao.updateDecision(decision)
+
+    //perform in background thread
+    fun updateDecision(decision: Decision) =
+        executor.execute { decisionDao.updateDecision(decision) }
+
+    fun addDecision(decision: Decision) = executor.execute { decisionDao.addDecision(decision) }
 
     //COMPANION OBJECT FOR SINGLETON
     companion object {

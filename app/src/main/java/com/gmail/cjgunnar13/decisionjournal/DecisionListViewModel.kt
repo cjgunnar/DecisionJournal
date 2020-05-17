@@ -8,4 +8,5 @@ class DecisionListViewModel : ViewModel()  {
 
     //access methods
     val decisionsLiveData = decisionRepository.getDecisions()
+    fun addDecision(decision: Decision) = decisionRepository.addDecision(decision)
 }
