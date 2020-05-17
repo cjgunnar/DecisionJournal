@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -67,6 +68,7 @@ class DecisionListFragment : Fragment() {
     //RECYCLER
     private inner class DecisionHolder(view: View) : RecyclerView.ViewHolder(view) {
         //UI elements
+        val nameTextView: TextView = view.findViewById(R.id.tv_lid_name)
 
         //decision to display
         private var decision: Decision? = null
@@ -75,6 +77,7 @@ class DecisionListFragment : Fragment() {
             this.decision = decision
 
             //update UI elements
+            nameTextView.text = decision.name
         }
     }
 
