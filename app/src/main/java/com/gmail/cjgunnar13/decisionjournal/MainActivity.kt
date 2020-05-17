@@ -1,10 +1,14 @@
 package com.gmail.cjgunnar13.decisionjournal
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 
 private const val TAG = "MainActivity"
 
+/**
+ * Launched and displayed on start of app
+ * Manages fragments and their callbacks/communications
+ */
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

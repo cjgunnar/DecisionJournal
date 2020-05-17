@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import java.util.*
 
+/**
+ * Fragment displaying details of an decision object for edit/view
+ * create with newInstance
+ */
 class DecisionFragment : Fragment() {
 
     override fun onCreateView(
