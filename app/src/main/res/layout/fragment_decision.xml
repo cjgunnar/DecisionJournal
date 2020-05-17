@@ -3,4 +3,18 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <EditText
+        android:id="@+id/et_decision_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="no"
+        android:hint="@string/decision_name"
+        android:inputType="text"
+        android:maxLines="1" />
+
+    <ExpandableListView
+        android:id="@+id/elv_field_questions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

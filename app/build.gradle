@@ -37,8 +37,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    //view models
+    //view models/lifecycle
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    //needed to access view model
+    implementation 'androidx.fragment:fragment-ktx:1.2.4'
 
     //recycler view
     implementation 'androidx.recyclerview:recyclerview:1.1.0'

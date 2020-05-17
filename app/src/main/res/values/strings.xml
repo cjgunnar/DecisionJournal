@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">DecisionJournal</string>
 
-    <!-- Main Menu -->
+    <!-- DecisionListFragment -->
     <string name="nothing_to_show">No decisions to show, use the add icon to create one</string>
+
+    <!-- DecisionFragment -->
+    <string name="decision_name">Decision Name</string>
 </resources>

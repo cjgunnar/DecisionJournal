@@ -2,7 +2,9 @@ package com.gmail.cjgunnar13.decisionjournal.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.gmail.cjgunnar13.decisionjournal.Decision
 import java.util.*
 
@@ -24,7 +26,12 @@ interface DecisionDao {
 
     //getDecision with review after Date
 
+
     //updateDecision
+    @Update
+    fun updateDecision(decision: Decision)
 
     //addDecision(decision)
+    @Insert
+    fun addDecision(decision: Decision)
 }

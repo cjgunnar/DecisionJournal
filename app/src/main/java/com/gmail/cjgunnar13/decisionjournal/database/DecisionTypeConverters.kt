@@ -41,4 +41,15 @@ class DecisionTypeConverters {
         return Gson().fromJson(fields, Array<String>::class.java).toMutableList()
     }
 
+    /*
+    @TypeConverter
+    fun toFieldsAnswers(fields: MutableList<String>?): String? {
+        return Gson().toJson(fields)
+    }
+
+    @TypeConverter
+    fun fromFieldsAnswers(fields: String?): MutableList<String>? {
+        return Gson().fromJson(fields, Array<String>::class.java).toMutableList()
+    }
+     */
 }

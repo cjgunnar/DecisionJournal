@@ -27,7 +27,7 @@ class DecisionRepository private constructor(context: Context) {
     //REPOSITORY ACCESS FUNCTIONS
     fun getDecisions(): LiveData<List<Decision>> = decisionDao.getDecisions()
     fun getDecision(uuid: UUID): LiveData<Decision?> = decisionDao.getDecision(uuid)
-
+    fun updateDecision(decision: Decision) = decisionDao.updateDecision(decision)
 
     //COMPANION OBJECT FOR SINGLETON
     companion object {
