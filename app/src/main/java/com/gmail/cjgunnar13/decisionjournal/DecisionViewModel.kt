@@ -21,8 +21,7 @@ class DecisionViewModel : ViewModel() {
         decisionIdData.value = decisionId
     }
 
-    fun saveDecision(decision: Decision) {
-        decisionRepository.updateDecision(decision)
-    }
+    fun saveDecision(decision: Decision) = decisionRepository.updateDecision(decision)
+
 
 }

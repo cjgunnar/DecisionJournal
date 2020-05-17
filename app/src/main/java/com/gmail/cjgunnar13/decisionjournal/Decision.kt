@@ -10,7 +10,7 @@ import java.util.*
 @Entity
 data class Decision(
     @PrimaryKey val id: UUID = UUID.randomUUID(),
-    var title: String = "",
+    var name: String = "",
     var date: Date = Date(),
     var fieldsQuestions: MutableList<String> = mutableListOf(), // empty list of strings
     var fieldsAnswers: MutableList<String> = mutableListOf() // empty list of strings
