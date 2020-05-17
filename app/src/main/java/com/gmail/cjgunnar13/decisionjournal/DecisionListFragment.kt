@@ -21,6 +21,7 @@ private const val TAG = "DecisionListFragment"
 class DecisionListFragment : Fragment() {
     //UI elements
     private lateinit var decisionRecyclerView: RecyclerView
+    private lateinit var emptyTextView: TextView
 
     private var adapter: DecisionAdapter = DecisionAdapter(emptyList())
 
@@ -65,6 +66,8 @@ class DecisionListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = this@DecisionListFragment.adapter
         }
+
+        emptyTextView = view.findViewById(R.id.tv_fdl_empty_display)
 
         return view
     }
@@ -111,6 +114,14 @@ class DecisionListFragment : Fragment() {
 //        for (element in decisions) {
 //            Log.d(TAG, "Element: $element")
 //        }
+
+        if (decisions.isEmpty()) {
+            decisionRecyclerView.visibility = View.GONE
+            emptyTextView.visibility = View.VISIBLE
+        } else {
+            decisionRecyclerView.visibility = View.VISIBLE
+            emptyTextView.visibility = View.GONE
+        }
 
         adapter = DecisionAdapter(decisions)
         decisionRecyclerView.adapter = adapter
