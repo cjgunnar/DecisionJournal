@@ -1,21 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/et_decision_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="no"
-        android:hint="@string/decision_name"
-        android:inputType="text"
-        android:maxLines="1" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/b_decision_date_picker"
-        android:text="@string/date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/et_decision_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="no"
+            android:hint="@string/decision_name"
+            android:inputType="text"
+            android:maxLines="1" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/b_decision_date_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/date" />
+
+        <LinearLayout
+            android:id="@+id/ll_decision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <Button
+            android:id="@+id/b_decision_add_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_field" />
+
+    </LinearLayout>
+
+
+</ScrollView>

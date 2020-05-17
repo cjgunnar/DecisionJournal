@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import java.text.DateFormat
@@ -28,8 +29,10 @@ class DecisionFragment : Fragment(), DatePickerFragment.Callbacks {
     private lateinit var decision: Decision
 
     //UI components
+    private lateinit var linearLayout: LinearLayout
     private lateinit var nameEditText: EditText
     private lateinit var dateButton: Button
+    private lateinit var addFieldButton: Button
     //private lateinit var fieldListView: ExpandableListView
 
     private val model: DecisionViewModel by lazy {
@@ -54,8 +57,10 @@ class DecisionFragment : Fragment(), DatePickerFragment.Callbacks {
         val view = inflater.inflate(R.layout.fragment_decision, container, false)
 
         //initialize views based on R.id
+        linearLayout = view.findViewById(R.id.ll_decision) as LinearLayout
         nameEditText = view.findViewById(R.id.et_decision_name) as EditText
         dateButton = view.findViewById(R.id.b_decision_date_picker) as Button
+        addFieldButton = view.findViewById(R.id.b_decision_add_field) as Button
         //fieldListView = view.findViewById(R.id.elv_field_questions)
 
         return view
@@ -76,9 +81,59 @@ class DecisionFragment : Fragment(), DatePickerFragment.Callbacks {
         )
     }
 
+    /**
+     * change UI elements to show updated features of loaded decision
+     *
+     */
     private fun updateUI() {
         nameEditText.setText(decision.name)
         dateButton.text = DateFormat.getDateInstance(DateFormat.MEDIUM).format(decision.date)
+
+        linearLayout.removeAllViewsInLayout()
+        for (i in 0 until decision.fieldsQuestions.size) {
+            val answer = decision.fieldsAnswers[i]
+            val question = decision.fieldsQuestions[i]
+            val qWatcher = object : TextWatcher {
+                override fun afterTextChanged(p0: Editable?) {}
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    decision.fieldsQuestions[i] = p0.toString()
+                }
+            }
+            val qField = EditText(context).apply {
+                setHint(R.string.sample_question)
+                setText(question)
+                addTextChangedListener(qWatcher)
+            }
+
+            val aWatcher = object : TextWatcher {
+                override fun afterTextChanged(p0: Editable?) {}
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    decision.fieldsAnswers[i] = p0.toString()
+                }
+            }
+            val aField = EditText(context).apply {
+                setHint(R.string.sample_answer)
+                setText(answer)
+                addTextChangedListener(aWatcher)
+            }
+
+            //add view second to last (so add field button remains on bottom)
+            linearLayout.addView(qField, linearLayout.childCount)
+            linearLayout.addView(aField, linearLayout.childCount)
+        }
+    }
+
+    /**
+     * add blank q&a fields to list
+     * updatesUI after
+     */
+    private fun addEmptyField() {
+        val fieldIdx = decision.fieldsQuestions.size
+        decision.fieldsQuestions.add(fieldIdx, "")
+        decision.fieldsAnswers.add(fieldIdx, "")
+        updateUI()
     }
 
     override fun onStart() {
@@ -105,13 +160,19 @@ class DecisionFragment : Fragment(), DatePickerFragment.Callbacks {
                 show(this@DecisionFragment.parentFragmentManager, DIALOG_DATE)
             }
         }
+
+        addFieldButton.setOnClickListener {
+            addEmptyField()
+        }
     }
 
     override fun onStop() {
         super.onStop()
+        //save when hitting back arrow or leaving app
         model.saveDecision(decision)
     }
 
+    //INSTANTIATION
     companion object {
         /**
          * Create a new instance, displaying the decision with decisionID
@@ -127,6 +188,7 @@ class DecisionFragment : Fragment(), DatePickerFragment.Callbacks {
         }
     }
 
+    //CALLBACKS
     override fun onDateSelected(date: Date) {
         decision.date = date
         updateUI()

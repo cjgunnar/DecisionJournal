@@ -8,6 +8,9 @@
     <!-- DecisionFragment -->
     <string name="decision_name">Decision Name</string>
     <string name="date">Date</string>
+    <string name="add_field">Add Field</string>
+    <string name="sample_question">Sample Question</string>
+    <string name="sample_answer">Sample Answer</string>
     <!-- menu -->
     <string name="new_decision">New Decision</string>
 </resources>
