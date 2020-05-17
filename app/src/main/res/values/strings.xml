@@ -7,6 +7,7 @@
 
     <!-- DecisionFragment -->
     <string name="decision_name">Decision Name</string>
+    <string name="date">Date</string>
     <!-- menu -->
     <string name="new_decision">New Decision</string>
 </resources>

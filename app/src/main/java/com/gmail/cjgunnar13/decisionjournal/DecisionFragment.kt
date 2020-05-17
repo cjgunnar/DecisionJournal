@@ -6,23 +6,31 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import java.text.DateFormat
 import java.util.*
 
 private const val ARG_DECISION_ID = "arg_decision_id"
+
+private const val REQUEST_DATE = 0
+
+private const val DIALOG_DATE = "dialog_date"
 
 /**
  * Fragment displaying details of an decision object for edit/view
  * create with newInstance
  */
-class DecisionFragment : Fragment() {
+class DecisionFragment : Fragment(), DatePickerFragment.Callbacks {
 
     private lateinit var decision: Decision
 
     //UI components
     private lateinit var nameEditText: EditText
+    private lateinit var dateButton: Button
+    //private lateinit var fieldListView: ExpandableListView
 
     private val model: DecisionViewModel by lazy {
         ViewModelProvider(this@DecisionFragment).get(DecisionViewModel::class.java)
@@ -47,6 +55,8 @@ class DecisionFragment : Fragment() {
 
         //initialize views based on R.id
         nameEditText = view.findViewById(R.id.et_decision_name) as EditText
+        dateButton = view.findViewById(R.id.b_decision_date_picker) as Button
+        //fieldListView = view.findViewById(R.id.elv_field_questions)
 
         return view
     }
@@ -68,6 +78,7 @@ class DecisionFragment : Fragment() {
 
     private fun updateUI() {
         nameEditText.setText(decision.name)
+        dateButton.text = DateFormat.getDateInstance(DateFormat.MEDIUM).format(decision.date)
     }
 
     override fun onStart() {
@@ -87,6 +98,13 @@ class DecisionFragment : Fragment() {
             }
         }
         nameEditText.addTextChangedListener(nameWatcher)
+
+        dateButton.setOnClickListener {
+            DatePickerFragment.newInstance(decision.date).apply {
+                setTargetFragment(this@DecisionFragment, REQUEST_DATE)
+                show(this@DecisionFragment.parentFragmentManager, DIALOG_DATE)
+            }
+        }
     }
 
     override fun onStop() {
@@ -107,5 +125,10 @@ class DecisionFragment : Fragment() {
                 arguments = args
             }
         }
+    }
+
+    override fun onDateSelected(date: Date) {
+        decision.date = date
+        updateUI()
     }
 }

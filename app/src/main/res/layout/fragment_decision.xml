@@ -12,8 +12,9 @@
         android:inputType="text"
         android:maxLines="1" />
 
-    <ExpandableListView
-        android:id="@+id/elv_field_questions"
+    <Button
+        android:id="@+id/b_decision_date_picker"
+        android:text="@string/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
