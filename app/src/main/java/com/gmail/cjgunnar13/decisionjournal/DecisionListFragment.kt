@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.text.DateFormat
 import java.util.*
 
 private const val TAG = "DecisionListFragment"
@@ -132,6 +133,7 @@ class DecisionListFragment : Fragment() {
         View.OnClickListener {
         //UI elements
         val nameTextView: TextView = view.findViewById(R.id.tv_lid_name)
+        val dateTextView: TextView = view.findViewById(R.id.tv_lid_date)
 
         //decision to display
         private var decision: Decision? = null
@@ -146,6 +148,7 @@ class DecisionListFragment : Fragment() {
             //update UI elements
             nameTextView.text =
                 if (decision.name.isNotBlank()) decision.name else getString(R.string.unnamed)
+            dateTextView.text = DateFormat.getDateInstance(DateFormat.SHORT).format(decision.date)
         }
 
         override fun onClick(p0: View?) {
