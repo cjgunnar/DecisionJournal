@@ -51,4 +51,7 @@ dependencies {
 
     //json for serializing/type conversion for database
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    //system preferences library
+    implementation 'androidx.preference:preference:1.1.1'
 }

@@ -19,4 +19,16 @@
     <string name="new_decision">New Decision</string>
     <string name="search_decision_name">Search</string>
     <string name="clear_search">Clear Search</string>
+    <string name="settings">Settings</string>
+
+    <!-- SettingsFragment -->
+    <string name="theme_choice">Theme</string>
+    <!-- Theme Entries (see res/values/array_themes_entries.xml) -->
+    <string name="system_choice">System (Recommended)</string>
+    <string name="light">Force Light</string>
+    <string name="dark">Force Dark</string>
+    <!-- Theme EntryValues -->
+    <string name="system_choice_value">system</string>
+    <string name="light_value">light</string>
+    <string name="dark_value">dark</string>
 </resources>

@@ -175,6 +175,9 @@ class DecisionListFragment : Fragment() {
         decisionRecyclerView.adapter = adapter
     }
 
+    /**
+     * restrict recyclerview results to those containing a substring of name
+     */
     private fun searchByName(name: String) {
         val filtered = adapter.decisions.filter { name in it.name }
         Toast.makeText(
@@ -186,6 +189,9 @@ class DecisionListFragment : Fragment() {
         updateUI(filtered)
     }
 
+    /**
+     * clear the current search and show all
+     */
     private fun clearSearch() {
         model.decisionsLiveData.value?.let {
             updateUI(it)
