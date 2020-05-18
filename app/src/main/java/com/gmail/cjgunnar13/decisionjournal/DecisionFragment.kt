@@ -1,5 +1,7 @@
 package com.gmail.cjgunnar13.decisionjournal
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import java.text.DateFormat
@@ -33,12 +36,14 @@ class DecisionFragment : Fragment(), DatePickerFragment.Callbacks {
     private lateinit var nameEditText: EditText
     private lateinit var dateButton: Button
     private lateinit var addFieldButton: Button
+    private lateinit var deleteDecisionButton: Button
     //private lateinit var fieldListView: ExpandableListView
 
     private val model: DecisionViewModel by lazy {
         ViewModelProvider(this@DecisionFragment).get(DecisionViewModel::class.java)
     }
 
+    //LIFECYCLE FUNCTIONS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -61,6 +66,7 @@ class DecisionFragment : Fragment(), DatePickerFragment.Callbacks {
         nameEditText = view.findViewById(R.id.et_decision_name) as EditText
         dateButton = view.findViewById(R.id.b_decision_date_picker) as Button
         addFieldButton = view.findViewById(R.id.b_decision_add_field) as Button
+        deleteDecisionButton = view.findViewById(R.id.b_decision_delete) as Button
         //fieldListView = view.findViewById(R.id.elv_field_questions)
 
         return view
@@ -163,6 +169,20 @@ class DecisionFragment : Fragment(), DatePickerFragment.Callbacks {
 
         addFieldButton.setOnClickListener {
             addEmptyField()
+        }
+
+        deleteDecisionButton.setOnClickListener {
+            AlertDialog.Builder(context)
+                .setTitle(R.string.delete_decision)
+                .setMessage(R.string.confirm_deletion)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes) { _: DialogInterface?, _: Int ->
+                    model.deleteDecision(decision.id)
+                    Toast.makeText(context, R.string.deletion_confirmed, Toast.LENGTH_SHORT).show()
+                    parentFragmentManager.popBackStackImmediate()
+                }
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
         }
     }
 

@@ -34,4 +34,8 @@ interface DecisionDao {
     //addDecision(decision)
     @Insert
     fun addDecision(decision: Decision)
+
+    //deleteDecision(id)
+    @Query("DELETE FROM decision WHERE ID=(:uuid)")
+    fun deleteDecision(uuid: UUID)
 }

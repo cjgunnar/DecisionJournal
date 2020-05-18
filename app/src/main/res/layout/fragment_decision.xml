@@ -36,6 +36,13 @@
             android:layout_height="wrap_content"
             android:text="@string/add_field" />
 
+        <Button
+            android:id="@+id/b_decision_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_decision"
+            android:textColor="@color/warning_red" />
+
     </LinearLayout>
 
 

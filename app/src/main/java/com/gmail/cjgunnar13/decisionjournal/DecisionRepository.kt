@@ -37,6 +37,10 @@ class DecisionRepository private constructor(context: Context) {
 
     fun addDecision(decision: Decision) = executor.execute { decisionDao.addDecision(decision) }
 
+    fun deleteDecision(decisionId: UUID) =
+        executor.execute { decisionDao.deleteDecision(decisionId) }
+
+
     //COMPANION OBJECT FOR SINGLETON
     companion object {
         //create as singleton

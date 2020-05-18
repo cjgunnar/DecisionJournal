@@ -23,5 +23,7 @@ class DecisionViewModel : ViewModel() {
 
     fun saveDecision(decision: Decision) = decisionRepository.updateDecision(decision)
 
+    fun deleteDecision(decisionId: UUID) = decisionRepository.deleteDecision(decisionId)
+
 
 }

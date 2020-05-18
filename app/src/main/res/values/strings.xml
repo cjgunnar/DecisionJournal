@@ -11,6 +11,9 @@
     <string name="add_field">Add Field</string>
     <string name="sample_question">Sample Question</string>
     <string name="sample_answer">Sample Answer</string>
+    <string name="delete_decision">Delete Decision</string>
+    <string name="confirm_deletion">Are you sure you want to delete? This action is permanent.</string>
+    <string name="deletion_confirmed">Decision deleted</string>
     <!-- menu -->
     <string name="new_decision">New Decision</string>
 </resources>
