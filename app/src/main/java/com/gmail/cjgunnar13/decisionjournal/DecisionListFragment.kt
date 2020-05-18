@@ -1,9 +1,13 @@
 package com.gmail.cjgunnar13.decisionjournal
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +17,8 @@ import java.text.DateFormat
 import java.util.*
 
 private const val TAG = "DecisionListFragment"
+
+private const val BUNDLE_SEARCH_TERM = "bundle_search_term"
 
 /**
  * Shows a list of decisions in order retrieved from database
@@ -25,6 +31,8 @@ class DecisionListFragment : Fragment() {
     private lateinit var emptyTextView: TextView
 
     private var adapter: DecisionAdapter = DecisionAdapter(emptyList())
+
+    private var searchTerm: String? = null
 
     private val model: DecisionListViewModel by lazy {
         ViewModelProvider(this@DecisionListFragment).get(DecisionListViewModel::class.java)
@@ -41,6 +49,17 @@ class DecisionListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
+        //load bundled data
+        savedInstanceState?.let {
+            searchTerm = savedInstanceState.getString(BUNDLE_SEARCH_TERM)
+        }
+    }
+
+    //save bundled data for rotation
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(BUNDLE_SEARCH_TERM, searchTerm)
     }
 
     override fun onAttach(context: Context) {
@@ -86,6 +105,14 @@ class DecisionListFragment : Fragment() {
                 }
             }
         )
+
+        //perform search if there is a search term present
+        //ex after rotation or config change
+        searchTerm?.let {
+            if (it.isNotBlank()) {
+                searchByName(it)
+            }
+        }
     }
 
     //MENU
@@ -100,6 +127,26 @@ class DecisionListFragment : Fragment() {
                 val decision = Decision()
                 model.addDecision(decision)
                 callbacks?.onDecisionSelected(decision.id)
+                true
+            }
+            R.id.menu_search_name -> {
+                val input = EditText(context).apply {
+                    setText(searchTerm ?: "")
+                }
+                AlertDialog.Builder(context)
+                    .setView(input)
+                    .setTitle(R.string.search_decision_name)
+                    .setPositiveButton(android.R.string.ok) { _: DialogInterface, _: Int ->
+                        //sort list
+                        if (input.text.toString().isNotBlank()) {
+                            searchByName(input.text.toString())
+                        }
+                    }
+                    .setNegativeButton(R.string.clear_search) { _: DialogInterface, _: Int ->
+                        //reset filter
+                        clearSearch()
+                    }
+                    .show()
                 true
             }
             else -> return super.onOptionsItemSelected(item)
@@ -126,6 +173,23 @@ class DecisionListFragment : Fragment() {
 
         adapter = DecisionAdapter(decisions)
         decisionRecyclerView.adapter = adapter
+    }
+
+    private fun searchByName(name: String) {
+        val filtered = adapter.decisions.filter { name in it.name }
+        Toast.makeText(
+            context,
+            getString(R.string.found_results).format(filtered.size),
+            Toast.LENGTH_LONG
+        ).show()
+        searchTerm = name
+        updateUI(filtered)
+    }
+
+    private fun clearSearch() {
+        model.decisionsLiveData.value?.let {
+            updateUI(it)
+        }
     }
 
     //RECYCLER

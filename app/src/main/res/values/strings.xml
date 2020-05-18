@@ -2,7 +2,7 @@
     <string name="app_name">DecisionJournal</string>
 
     <!-- DecisionListFragment -->
-    <string name="nothing_to_show">No decisions to show, use the add icon to create one</string>
+    <string name="nothing_to_show">No decisions to show, clear your search or create a new one</string>
     <string name="unnamed">Unnamed</string>
 
     <!-- DecisionFragment -->
@@ -14,6 +14,9 @@
     <string name="delete_decision">Delete Decision</string>
     <string name="confirm_deletion">Are you sure you want to delete? This action is permanent.</string>
     <string name="deletion_confirmed">Decision deleted</string>
+    <string name="found_results">Found %d results</string>
     <!-- menu -->
     <string name="new_decision">New Decision</string>
+    <string name="search_decision_name">Search</string>
+    <string name="clear_search">Clear Search</string>
 </resources>

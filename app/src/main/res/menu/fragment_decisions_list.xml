@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_search_name"
+        android:icon="@drawable/ic_menu_search"
+        android:title="@string/search_decision_name"
+        app:showAsAction="ifRoom|withText" />
+
+    <item
         android:id="@+id/menu_new_decision"
         android:icon="@drawable/ic_menu_add"
         android:title="@string/new_decision"
