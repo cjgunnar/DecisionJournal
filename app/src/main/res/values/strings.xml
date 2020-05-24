@@ -20,6 +20,7 @@
     <string name="search_decision_name">Search</string>
     <string name="clear_search">Clear Search</string>
     <string name="settings">Settings</string>
+    <string name="guide_menu">Guide</string>
 
     <!-- SettingsFragment -->
     <string name="theme_choice">Theme</string>
@@ -31,4 +32,10 @@
     <string name="system_choice_value">system</string>
     <string name="light_value">light</string>
     <string name="dark_value">dark</string>
+
+    <!-- GuideFragment -->
+    <string name="guide_text">Welcome to Decision Journal.\n
+This app is designed to allow for a systematic way for making decisions, and perhaps more importantly, reflecting on previous ones.</string>
+
+    <string name="get_started">Get Started</string>
 </resources>

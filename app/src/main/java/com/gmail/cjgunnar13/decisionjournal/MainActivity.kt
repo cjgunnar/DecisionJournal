@@ -82,6 +82,14 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     .commit()
                 true
             }
+            R.id.menu_guide -> {
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fl_fragment_container, GuideFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
